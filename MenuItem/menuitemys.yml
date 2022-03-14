@@ -1,34 +1,34 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: menuitemlisting-deployment
+  name: menuitem-deployment
   labels:
-    app: MenuItemListing
+    app: MenuItem
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: MenuItemListing  
+      app: MenuItem  
   template:
     metadata:
       labels:
-        app: MenuItemListing
+        app: MenuItem
     spec:
       containers:
-      - name: dnazureacrcase
-        image: dnazureacrcase.azurecr.io/dnazureacr:latest
+      - name: dnazureacr1303
+        image: dnazureacr1303.azurecr.io/dnazurecontainerrepos:latest
         ports:
         - containerPort: 8080
       imagePullSecrets:
-      - name: webiapisecretkey
+      - name: webapisvcsecret   
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: menuitemlistingsvc
+  name: menuitemsvc
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: MenuItemListing
+    app: MenuItem
